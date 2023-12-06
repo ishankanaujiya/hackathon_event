@@ -29,20 +29,29 @@ void entry()
 				printf("\nLogin was not successful please try again!!!");
 				fflush(stdin);
 				getchar();
-				entry();
+				continue;
 			}
 			break;
 
 		case 2:
 			printf("Registering...");
+			if (!college_code_matches())
+			{
+				printf("\n College code didnt matched.");
+				fflush(stdin);
+				getchar();
+				continue;
+			}
 			if (account_registered())
 			{
-				entry();
+				continue;
 			}
 			else
 			{
 				printf("Failed to register account!!! Try again.");
-				entry();
+				fflush(stdin);
+				getchar();
+				continue;
 			}
 			break;
 
@@ -168,6 +177,7 @@ re_password:
 		getchar();
 		return 1;
 	}
+	fflush(stdin);
 	fclose(user_data);
 	return 0;
 }
@@ -226,4 +236,32 @@ int login_validated(char username[], char password[])
 
 	fclose(user_data);
 	return id_matched;
+}
+
+int college_code_matches() {
+	system("cls");
+    int input_length;
+    char input_code[30];
+    char code[30];
+    FILE *college_code;
+    college_code = fopen("resources/college_codes.txt", "r");
+    if (college_code == NULL) {
+        printf("\n College Code file not found.");
+        return 0;
+    }
+
+    fflush(stdin);
+    printf("\n Enter your College code: ");
+    scanf("%[^\n]", input_code);
+    fflush(stdin);
+
+    while (fgets(code, sizeof(code), college_code) != NULL) {
+        code[strcspn(code, "\n")] = '\0';
+        if (strcmp(code, input_code) == 0) {
+            fclose(college_code);
+            return 1;
+        }
+    }
+    fclose(college_code);
+    return 0;
 }

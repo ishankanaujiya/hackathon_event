@@ -11,13 +11,14 @@
 
 typedef struct
 {
-	char username[31];
-	unsigned char password_hash[64];
-	//char[]="kist@123";
+    char username[31];
+    unsigned char password_hash[64];
+    //char college_code[30];
 } User;
 
 void entry();
 int login();
+int college_code_matches();
 int account_registered();
 int is_password_user_valid(char password_user[]);
 int user_already_registered(char username[], FILE *file);
