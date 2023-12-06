@@ -5,8 +5,8 @@ void main_menu()
 	while (1)
 	{
 
-		int choice=0;
-		printf("--------Main Menu-------");
+		int choice = 0;
+		printf("\n--------Main Menu-------");
 		printf("\n1. Admin");
 		printf("\n2. Student");
 		printf("\n3. Exit");
@@ -14,6 +14,23 @@ void main_menu()
 		scanf("%d", &choice);
 		fflush(stdin);
 
-		
+		switch (choice)
+		{
+		case 1:
+			//admin function
+            menu();
+			break;
+
+		case 2:
+			//student function
+			break;
+		case 3:
+			exit(0);
+			break;
+		default:
+			printf("The entered choice is not valid. Please try again....");
+            Sleep(2000);
+			break;
+		}
 	}
 }
