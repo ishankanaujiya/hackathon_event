@@ -1,6 +1,7 @@
 #include "../include/mainmenu.h"
 #include "../include/admin.h"
 #include "../include/authentication.h"
+#include "../include/student.h"
 void main_menu()
 {
 	while (1)
@@ -18,20 +19,20 @@ void main_menu()
 		switch (choice)
 		{
 		case 1:
-			//admin function
-          //  menu();
-		   entry();
+			// admin function
+			//  menu();
+			entry();
 			break;
 
 		case 2:
-			//student function
+			// student function
 			break;
 		case 3:
 			exit(0);
 			break;
 		default:
 			printf("The entered choice is not valid. Please try again....");
-            Sleep(2000);
+			Sleep(2000);
 			break;
 		}
 	}
