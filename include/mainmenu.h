@@ -1,9 +1,10 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 #include "stdio.h"
-#include "stdlib.h"
-#include"Windows.h"
-//#include <unistd.h>
+#include "authentication.h"
+#include "student.h"
+#include "utility.h"
+
 void main_menu();
 
 #endif

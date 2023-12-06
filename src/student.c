@@ -31,10 +31,10 @@ re_symbol_no:
             printf("\n---------------------------------------------");
             printf("\n\nStudent name : %s %s", read_student.first_name, read_student.last_name);
             printf("\n\nDate of Birth: %d /%d /%d", read_student.DOB[0], read_student.DOB[1], read_student.DOB[2]);
-            printf("\n\nSubjects:");
+            printf("\n\n\tSubjects\t\tMarks\t\tGPA\t\tGrade");
             for (i = 0; i < read_student.no_of_sub; i++)
             {
-                printf("\n%-30s%10d%10.2f%10s ", read_student.subject[i], read_student.marks[i], read_student.gpa[i], read_student.grade[i]);
+                printf("\n\t%s\t|%10d \t|%10.2f\t|%10s\t| ", read_student.subject[i], read_student.marks[i], read_student.gpa[i], read_student.grade[i]);
             }
             printf("\n\nCGPA:%.2f", read_student.cgpa);
         }

@@ -4,7 +4,9 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "Windows.h"
-
+#include "ctype.h"
+#include "calculator.h"
+#include "modify.h"
 
 struct Student
 {
@@ -19,5 +21,12 @@ struct Student
     char grade[8][3];
     float cgpa;
 };
+
 void menu();
+void addstudent();
+void view_record();
+void search();
+int name_is_valid(char[], char[]);
+int check_DOB(int *);
+
 #endif

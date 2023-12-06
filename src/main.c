@@ -1,4 +1,7 @@
-#include "../include/mainmenu.h"
-int main(){
-main_menu();
+#include "mainMenu.h"
+int main()
+{
+	main_menu();
+	getchar();
+	return 0;
 }
