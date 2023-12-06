@@ -1,6 +1,7 @@
 #include "../include/admin.h"
 void menu()
 {
+    system("cls");
     while (1)
     {
         int choice = 0;

@@ -19,5 +19,5 @@ struct Student
     char grade[8][3];
     float cgpa;
 };
-
+void menu();
 #endif

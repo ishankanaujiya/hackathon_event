@@ -1,5 +1,6 @@
 #include "../include/mainmenu.h"
-
+#include "../include/admin.h"
+#include "../include/authentication.h"
 void main_menu()
 {
 	while (1)
@@ -18,7 +19,8 @@ void main_menu()
 		{
 		case 1:
 			//admin function
-            menu();
+          //  menu();
+		   entry();
 			break;
 
 		case 2:
