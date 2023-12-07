@@ -37,7 +37,7 @@ void entry()
 			printf("Registering...");
 			if (!college_code_matches())
 			{
-				printf("\n College code didnt matched.");
+				printf("\n College code didn't matched. Please try again ! ");
 				fflush(stdin);
 				getchar();
 				continue;
@@ -116,7 +116,7 @@ int account_registered()
 	printf("--------Register Account-------\n");
 
 re_username:
-	printf("Enter a new login ID: \n");
+	printf("Enter a new login ID: ");
 	scanf("%s", user_name);
 	fflush(stdin);
 
