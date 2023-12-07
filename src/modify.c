@@ -15,8 +15,7 @@ void modify()
         getchar();
         exit(0);
     }
-
-    printf("\n\n ======= Modify Records ======\n\n");
+    printf("\n\t\t\t ======= Modify Records ======\n\n");
 find:
     printf("\nEnter symbol number: ");
     scanf("%d", &symbol_no);
@@ -61,7 +60,7 @@ find:
                     printf("\nsubjects cannot be more than 8.");
                     goto again_subject;
                 }
-
+                int fail = 0;
                 for (int i = 0; i < temp_record.no_of_sub; i++)
                 {
                     fflush(stdin);
@@ -77,8 +76,20 @@ find:
                         printf("\nInvalid input for marks.");
                         goto again_marks;
                     }
+                    if (temp_record.marks[i] >= 0 && temp_record.marks[i] <= 39)
+                    {
+                        fail++;
+                    }
                     temp_record.gpa[i] = calculate_gpa(temp_record.marks[i]);
                     strcpy(temp_record.grade[i], calculate_grade(temp_record.marks[i]));
+                }
+                if (fail > 0)
+                {
+                    strcpy(temp_record.remarks, "FAIL");
+                }
+                else
+                {
+                    strcpy(temp_record.remarks, "PASS");
                 }
                 temp_record.cgpa = calculate_cgpa(temp_record.no_of_sub, temp_record.gpa);
                 fwrite(&temp_record, sizeof(struct Student), 1, tempfile_ptr);

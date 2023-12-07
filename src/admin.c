@@ -35,12 +35,15 @@ void menu()
             search();
             break;
         case 4:
+            system("cls");
             delete ();
             break;
         case 5:
+            system("cls");
             modify();
             break;
         case 6:
+            system("cls");
             view_pass_fail();
             break;
         case 7:
@@ -95,14 +98,22 @@ again_symbol:
 
     is_student_present = 0;
     printf("\nEnter your symbol no: ");
-    scanf("%d", &input_student.symbol_no);
+    scanf("%u", &input_student.symbol_no);
+
+    if (input_student.symbol_no <= 999 || input_student.symbol_no > 9999)
+    {
+        printf("Symbol Number must contain 4 positive digits.\n");
+        fflush(stdin);
+        goto again_symbol;
+    }
+
     rewind(file_ptr);
     while (fread(&read_student, sizeof(struct Student), 1, file_ptr))
     {
         if (read_student.symbol_no == input_student.symbol_no)
         {
             is_student_present = 1;
-            printf("\nStudent with %d symbol number already exists.\n", input_student.symbol_no);
+            printf("\nStudent with %u symbol number already exists.\n", input_student.symbol_no);
 
             // rewind(file_ptr);
             goto again_symbol;
@@ -129,9 +140,10 @@ again_subject:
         printf("\nsubjects cannot be more than 8.");
         goto again_subject;
     }
-
+    int fail = 0;
     for (int i = 0; i < input_student.no_of_sub; i++)
     {
+
         fflush(stdin);
         printf("\nEnter subject name: ");
         scanf("%[^\n]", input_student.subject[i]);
@@ -144,11 +156,25 @@ again_subject:
             printf("\nInvalid input for marks.");
             goto again_marks;
         }
+        if (input_student.marks[i] >= 0 && input_student.marks[i] <= 39)
+        {
+            fail++;
+        }
+
         input_student.gpa[i] = calculate_gpa(input_student.marks[i]);
         grade = calculate_grade(input_student.marks[i]);
         strcpy(input_student.grade[i], grade);
         free(grade);
     }
+    if (fail > 0)
+    {
+        strcpy(input_student.remarks, "FAIL");
+    }
+    else
+    {
+        strcpy(input_student.remarks, "PASS");
+    }
+
     input_student.cgpa = calculate_cgpa(input_student.no_of_sub, input_student.gpa);
 
     if (!is_student_present)
@@ -156,9 +182,9 @@ again_subject:
         fseek(file_ptr, 0, SEEK_END);
         fwrite(&input_student, sizeof(struct Student), 1, file_ptr);
     }
-    printf("\nFILE HAS BEEN SUCCESFULLY ADDED");
+    printf("\nRECORD HAS BEEN ADDED SUCCESFULLY");
     fclose(file_ptr);
-    Sleep(3000);
+    Sleep(2000);
 }
 
 void view_record()
@@ -179,10 +205,12 @@ void view_record()
 
     while (fread(&read_student, sizeof(struct Student), 1, file_ptr))
     {
+
         printf("\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
-        printf("\n\nSymbol Number: %d", read_student.symbol_no);
-        printf("\n\nLevel: Bachelor");
+        printf("\n\nSymbol Number: %u", read_student.symbol_no);
+        printf("\n\nLevel: Bachelor ( BIT 1st SEM )");
         printf("\n\nDate of Birth: %d /%d /%d", read_student.DOB[0], read_student.DOB[1], read_student.DOB[2]);
+        printf("\n\n\n\t\t\t    Pre-Board Examination GradeSheet");
         printf("\n\t_________________________________________________________________________");
         printf("\n\n\t|\tSubjects\t|\tMarks\t|\tGrade\t|\tGPA\t|");
         printf("\n\t_________________________________________________________________________");
@@ -191,7 +219,7 @@ void view_record()
             printf("\n\t|\t%-10s\t|%10d \t|%10s\t|%10.2f\t|", read_student.subject[i], read_student.marks[i], read_student.grade[i], read_student.gpa[i]);
         }
         printf("\n\t_________________________________________________________________________");
-        printf("\n\n\t\t\t\t\t    Grade Point Average (GPA): %.2f", read_student.cgpa);
+        printf("\n\n\t Remarks: %s \t\t\t    Grade Point Average (GPA): %.2f", read_student.remarks, read_student.cgpa);
         printf("\n\t_________________________________________________________________________\n\n");
         printf("\n............................................................................................................\n\n");
     }
@@ -214,7 +242,7 @@ void search()
         printf("\nFILE DOESN'T EXIST\n");
         exit(0);
     }
-
+    // system("cls");
     printf("\n\t\t\t======= Search Records ======\n\n");
 re_symbol:
     printf("\nEnter symbol number: ");
@@ -226,9 +254,10 @@ re_symbol:
         {
             found_student = 1;
             printf("\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
-            printf("\n\nSymbol Number: %d", read_student.symbol_no);
-            printf("\n\nLevel: Bachelor");
+            printf("\n\nSymbol Number: %u", read_student.symbol_no);
+            printf("\n\nLevel: Bachelor ( BIT 1st SEM )");
             printf("\n\nDate of Birth: %d /%d /%d", read_student.DOB[0], read_student.DOB[1], read_student.DOB[2]);
+            printf("\n\n\n\t\t\t    Pre-Board Examination GradeSheet");
             printf("\n\t_________________________________________________________________________");
             printf("\n\n\t|\tSubjects\t|\tMarks\t|\tGrade\t|\tGPA\t|");
             printf("\n\t_________________________________________________________________________");
@@ -237,7 +266,7 @@ re_symbol:
                 printf("\n\t|\t%-10s\t|%10d \t|%10s\t|%10.2f\t|", read_student.subject[i], read_student.marks[i], read_student.grade[i], read_student.gpa[i]);
             }
             printf("\n\t_________________________________________________________________________");
-            printf("\n\n\t\t\t\t\t    Grade Point Average (GPA): %.2f", read_student.cgpa);
+            printf("\n\n\t Remarks: %s \t\t\t    Grade Point Average (GPA): %.2f", read_student.remarks, read_student.cgpa);
             printf("\n\t_________________________________________________________________________\n\n");
         }
     }
@@ -264,7 +293,7 @@ int check_DOB(int *date)
         Sleep(2000);
         return 0;
     }
-    else if (*(date + 2) < 2050 || *(date + 2) > 2065)
+    else if (*(date + 2) < 2050 || *(date + 2) > 2070)
     {
         printf("\n Invalid input for age.");
         Sleep(2000);
@@ -295,7 +324,6 @@ int name_is_valid(char firstname[], char lastname[])
 
 void view_pass_fail()
 {
-    system("cls");
     struct Student read_student;
     int found_student = 0;
     FILE *file_ptr;
@@ -314,17 +342,9 @@ void view_pass_fail()
     printf("\n________________________________________________________________________________________________");
     while (fread(&read_student, sizeof(struct Student), 1, file_ptr))
     {
-        if (read_student.cgpa < 2.0)
-        {
-            strcpy(read_student.remarks, "FAIL");
-        }
-        else
-        {
-            strcpy(read_student.remarks, "PASS");
-        }
         found_student = 1;
         printf("\n\n%s %-20s", read_student.first_name, read_student.last_name);
-        printf("\t\t%d", read_student.symbol_no);
+        printf("\t\t%u", read_student.symbol_no);
         printf("\t\t\t%.2f", read_student.cgpa);
         printf("\t\t\t%s", read_student.remarks);
     }
