@@ -69,7 +69,7 @@ void addstudent()
     struct Student input_student;
     struct Student read_student;
 
-    file_ptr = fopen("resources/student_info.txt", "a+");
+    file_ptr = fopen("resources/student_info.txt", "rb+");
     if (file_ptr == NULL)
     {
         printf("\nFILE DOESN'T EXIST\n");
