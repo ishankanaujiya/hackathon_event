@@ -1,7 +1,7 @@
 #include "mainMenu.h"
-
 void main_menu()
 {
+		
 	while (1)
 	{
 	re_main_menu:

@@ -27,7 +27,7 @@ re_symbol_no:
         if (read_student.symbol_no == read_symbol_no)
         {
             student_found = 1;
-            
+
             printf("\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
             printf("\n\nSymbol Number: %d", read_student.symbol_no);
             printf("\n\nDate of Birth: %d /%d /%d", read_student.DOB[0], read_student.DOB[1], read_student.DOB[2]);
@@ -36,14 +36,15 @@ re_symbol_no:
             printf("\n\t_________________________________________________________________________");
             for (i = 0; i < read_student.no_of_sub; i++)
             {
-                printf("\n\t|\t%-10s\t|%10d \t|%10s\t|%10.2f\t|", read_student.subject[i], read_student.marks[i],read_student.grade[i], read_student.gpa[i] );
+                printf("\n\t|\t%-10s\t|%10d \t|%10s\t|%10.2f\t|", read_student.subject[i], read_student.marks[i], read_student.grade[i], read_student.gpa[i]);
             }
             printf("\n\t_________________________________________________________________________");
-            printf("\n\n\t CGPA:%61.2f", read_student.cgpa);
+            printf("\n\n\t\t\t\t\t    Grade Point Average (GPA): %.2f", read_student.cgpa);
             printf("\n\t_________________________________________________________________________\n\n");
         }
+
     }
-   
+
     if (student_found == 0)
     {
         printf("\nYou have entered wrong symbol number! Try again!");

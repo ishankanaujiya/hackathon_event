@@ -162,25 +162,24 @@ void view_record()
         getchar();
         exit(0);
     }
-
     printf("\n=======Student Record======\n");
 
     while (fread(&read_student, sizeof(struct Student), 1, file_ptr))
     {
-            printf("\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
-            printf("\n\nSymbol Number: %d", read_student.symbol_no);
-            printf("\n\nDate of Birth: %d /%d /%d", read_student.DOB[0], read_student.DOB[1], read_student.DOB[2]);
-            printf("\n\t_________________________________________________________________________");
-            printf("\n\n\t|\tSubjects\t|\tMarks\t|\tGrade\t|\tGPA\t|");
-            printf("\n\t_________________________________________________________________________");
-            for (i = 0; i < read_student.no_of_sub; i++)
-            {
-                printf("\n\t|\t%-10s\t|%10d \t|%10s\t|%10.2f\t|", read_student.subject[i], read_student.marks[i],read_student.grade[i], read_student.gpa[i] );
-            }
-            printf("\n\t_________________________________________________________________________");
-            printf("\n\n\t CGPA:%61.2f", read_student.cgpa);
-            printf("\n\t_________________________________________________________________________\n\n");
-        
+        printf("\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
+        printf("\n\nSymbol Number: %d", read_student.symbol_no);
+        printf("\n\nDate of Birth: %d /%d /%d", read_student.DOB[0], read_student.DOB[1], read_student.DOB[2]);
+        printf("\n\t_________________________________________________________________________");
+        printf("\n\n\t|\tSubjects\t|\tMarks\t|\tGrade\t|\tGPA\t|");
+        printf("\n\t_________________________________________________________________________");
+        for (i = 0; i < read_student.no_of_sub; i++)
+        {
+            printf("\n\t|\t%-10s\t|%10d \t|%10s\t|%10.2f\t|", read_student.subject[i], read_student.marks[i], read_student.grade[i], read_student.gpa[i]);
+        }
+        printf("\n\t_________________________________________________________________________");
+        printf("\n\n\t\t\t\t\t    Grade Point Average (GPA): %.2f", read_student.cgpa);
+        printf("\n\t_________________________________________________________________________\n\n");
+        printf("\n............................................................................................................\n\n");
     }
     fclose(file_ptr);
     printf("\nPress enter to go back to menu...");
@@ -209,10 +208,10 @@ re_symbol:
 
     while (fread(&read_student, sizeof(struct Student), 1, file_ptr))
     {
-         if (read_student.symbol_no == symbol_no)
+        if (read_student.symbol_no == symbol_no)
         {
             found_student = 1;
-             printf("\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
+            printf("\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
             printf("\n\nSymbol Number: %d", read_student.symbol_no);
             printf("\n\nDate of Birth: %d /%d /%d", read_student.DOB[0], read_student.DOB[1], read_student.DOB[2]);
             printf("\n\t_________________________________________________________________________");
@@ -220,10 +219,10 @@ re_symbol:
             printf("\n\t_________________________________________________________________________");
             for (i = 0; i < read_student.no_of_sub; i++)
             {
-                printf("\n\t|\t%-10s\t|%10d \t|%10s\t|%10.2f\t|", read_student.subject[i], read_student.marks[i],read_student.grade[i], read_student.gpa[i] );
+                printf("\n\t|\t%-10s\t|%10d \t|%10s\t|%10.2f\t|", read_student.subject[i], read_student.marks[i], read_student.grade[i], read_student.gpa[i]);
             }
             printf("\n\t_________________________________________________________________________");
-            printf("\n\n\t CGPA:%61.2f", read_student.cgpa);
+            printf("\n\n\t\t\t\t\t    Grade Point Average (GPA): %.2f", read_student.cgpa);
             printf("\n\t_________________________________________________________________________\n\n");
         }
     }

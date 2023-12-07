@@ -4,6 +4,8 @@
 #include "authentication.h"
 #include "student.h"
 #include "utility.h"
+#include "windows.h"
+#include "stdlib.h"
 
 void main_menu();
 
