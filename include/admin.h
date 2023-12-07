@@ -12,6 +12,7 @@ struct Student
 {
     char first_name[20];
     char last_name[20];
+    char remarks[20];
     unsigned int symbol_no;
     int DOB[3];
     int no_of_sub;
@@ -28,5 +29,5 @@ void view_record();
 void search();
 int name_is_valid(char[], char[]);
 int check_DOB(int *);
-
+void view_pass_fail();
 #endif

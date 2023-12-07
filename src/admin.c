@@ -11,7 +11,8 @@ void menu()
         printf("3.Search Student Record\n");
         printf("4.Delete Student Record\n");
         printf("5.Edit Student Record\n");
-        printf("6.Authentication Menu\n");
+        printf("6.View Pass and Fail Record\n");
+        printf("7.Authentication Menu\n");
         printf("------------------------------------\n");
     re_choice:
         printf("Enter your choice: ");
@@ -37,6 +38,9 @@ void menu()
             modify();
             break;
         case 6:
+            view_pass_fail();
+            break;
+        case 7:
             return;
             break;
 
@@ -276,4 +280,49 @@ int name_is_valid(char firstname[], char lastname[])
         }
     }
     return 1;
+}
+
+void view_pass_fail()
+{
+    system("cls");
+    struct Student read_student;
+    int found_student = 0;
+    FILE *file_ptr;
+    int no_of_sub;
+    int i;
+    file_ptr = fopen("resources/student_info.txt", "rb");
+    if (file_ptr == NULL)
+    {
+        printf("\nFILE DOESN'T EXIST\n");
+        exit(0);
+    }
+
+    printf("\n\n======= Pass and Fail Records ======\n\n");
+    printf("\n________________________________________________________________________________________");
+    printf("\nStudent Name \t\t     Symbol Number \t\tGPA \t\t\tRemarks");
+    printf("\n________________________________________________________________________________________");
+    while (fread(&read_student, sizeof(struct Student), 1, file_ptr))
+    {
+        if (read_student.cgpa < 2.0)
+        {
+            strcpy(read_student.remarks, "FAIL");
+        }
+        else
+        {
+            strcpy(read_student.remarks, "PASS");
+        }
+        found_student = 1;
+        printf("\n\n%s %s", read_student.first_name, read_student.last_name);
+        printf("\t\t\t%d", read_student.symbol_no);
+        printf("\t\t\t%.2f", read_student.cgpa);
+        printf("\t\t\t %s", read_student.remarks);
+    }
+    printf("\n________________________________________________________________________________________");
+    if (found_student == 0)
+    {
+        printf("\nRecord not found.");
+    }
+    fclose(file_ptr);
+    fflush(stdin);
+    getchar();
 }
