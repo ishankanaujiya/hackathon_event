@@ -247,13 +247,13 @@ void search()
 re_symbol:
     printf("\nEnter symbol number: ");
     scanf("%d", &symbol_no);
-
+    printf("\n_________________________________________________________________________________________");
     while (fread(&read_student, sizeof(struct Student), 1, file_ptr))
     {
         if (read_student.symbol_no == symbol_no)
         {
             found_student = 1;
-            printf("\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
+            printf("\n\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
             printf("\n\nSymbol Number: %u", read_student.symbol_no);
             printf("\n\nLevel: Bachelor ( BIT 1st SEM )");
             printf("\n\nDate of Birth: %d /%d /%d", read_student.DOB[0], read_student.DOB[1], read_student.DOB[2]);
