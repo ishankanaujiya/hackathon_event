@@ -62,11 +62,11 @@ void addstudent()
     int is_student_present = 0;
     int date_is_valid;
     int name_valid;
-
+    
     struct Student input_student;
     struct Student read_student;
 
-    file_ptr = fopen("resources/student_info.txt", "rb+");
+    file_ptr = fopen("resources/student_info.txt", "a+");
     if (file_ptr == NULL)
     {
         printf("\nFILE DOESN'T EXIST\n");
@@ -89,14 +89,19 @@ again_name:
         goto again_name;
     }
 again_symbol:
+
+    is_student_present=0;
     printf("\nEnter your symbol no: ");
     scanf("%d", &input_student.symbol_no);
+    rewind(file_ptr);
     while (fread(&read_student, sizeof(struct Student), 1, file_ptr))
     {
         if (read_student.symbol_no == input_student.symbol_no)
         {
             is_student_present = 1;
             printf("\nStudent with %d symbol number already exists.\n", input_student.symbol_no);
+            
+            //rewind(file_ptr);
             goto again_symbol;
         }
     }
@@ -145,6 +150,7 @@ again_subject:
 
     if (!is_student_present)
     {
+        fseek(file_ptr,0,SEEK_END);
         fwrite(&input_student, sizeof(struct Student), 1, file_ptr);
     }
     printf("\nFILE HAS BEEN SUCCESFULLY ADDED");
