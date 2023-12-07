@@ -21,14 +21,17 @@ void menu()
         switch (choice)
         {
         case 1:
+            system("cls");
             addstudent();
             break;
 
         case 2:
+            system("cls");
             view_record();
             break;
 
         case 3:
+            system("cls");
             search();
             break;
         case 4:
@@ -74,7 +77,7 @@ void addstudent()
         exit(0);
     }
 
-    printf("\n=======Add Student======\n");
+    printf("\n\t\t\t=======Add Student======\n");
     fflush(stdin);
 again_name:
     printf("\nEnter first name: ");
@@ -172,7 +175,7 @@ void view_record()
         getchar();
         exit(0);
     }
-    printf("\n=======Student Record======\n");
+    printf("\n\t\t\t=======Student Record======\n");
 
     while (fread(&read_student, sizeof(struct Student), 1, file_ptr))
     {
@@ -211,7 +214,7 @@ void search()
         exit(0);
     }
 
-    printf("\n\n======= Search Records ======\n\n");
+    printf("\n\t\t\t======= Search Records ======\n\n");
 re_symbol:
     printf("\nEnter symbol number: ");
     scanf("%d", &symbol_no);
@@ -303,10 +306,10 @@ void view_pass_fail()
         exit(0);
     }
 
-    printf("\n\n======= Pass and Fail Records ======\n\n");
-    printf("\n________________________________________________________________________________________");
-    printf("\nStudent Name \t\t     Symbol Number \t\tGPA \t\t\tRemarks");
-    printf("\n________________________________________________________________________________________");
+    printf("\n\n\t\t\t\t======= Pass and Fail Records ======\n\n");
+    printf("\n________________________________________________________________________________________________");
+    printf("\nStudent Name\t\t\t   Symbol Number\t\tGPA\t\t\tRemarks");
+    printf("\n________________________________________________________________________________________________");
     while (fread(&read_student, sizeof(struct Student), 1, file_ptr))
     {
         if (read_student.cgpa < 2.0)
@@ -318,12 +321,12 @@ void view_pass_fail()
             strcpy(read_student.remarks, "PASS");
         }
         found_student = 1;
-        printf("\n\n%s %s", read_student.first_name, read_student.last_name);
-        printf("\t\t\t%d", read_student.symbol_no);
+        printf("\n\n%s %-20s", read_student.first_name, read_student.last_name);
+        printf("\t\t%d", read_student.symbol_no);
         printf("\t\t\t%.2f", read_student.cgpa);
-        printf("\t\t\t %s", read_student.remarks);
+        printf("\t\t\t%s", read_student.remarks);
     }
-    printf("\n________________________________________________________________________________________");
+    printf("\n________________________________________________________________________________________________");
     if (found_student == 0)
     {
         printf("\nRecord not found.");
