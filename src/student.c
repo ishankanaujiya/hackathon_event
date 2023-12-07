@@ -14,7 +14,7 @@ re_symbol_no:
     printf("\nEnter your symbol number: ");
     scanf("%d", &read_symbol_no);
     fflush(stdin);
-   printf("\nEnter your date of birth in  DD/MM/YYYY: ");
+    printf("\nEnter your date of birth in  DD/MM/YYYY: ");
     printf("\nEnter day: ");
     scanf("%d", &temp_DOB[0]);
     printf("Enter month: ");
@@ -34,13 +34,13 @@ re_symbol_no:
     int student_found = 0;
     while (fread(&read_student, sizeof(struct Student), 1, student_info))
     {
-        if (read_student.symbol_no == read_symbol_no && read_student.DOB[0]==temp_DOB[0] && read_student.DOB[1]==temp_DOB[1] && read_student.DOB[2]==temp_DOB[2])
+        if (read_student.symbol_no == read_symbol_no && read_student.DOB[0] == temp_DOB[0] && read_student.DOB[1] == temp_DOB[1] && read_student.DOB[2] == temp_DOB[2])
         {
             student_found = 1;
 
             printf("\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
             printf("\n\nSymbol Number: %d", read_student.symbol_no);
-            printf("\n\n Level: Bachelor");
+            printf("\n\nLevel: Bachelor");
             printf("\n\nDate of Birth: %d/%d/%d", read_student.DOB[0], read_student.DOB[1], read_student.DOB[2]);
             printf("\n\n\t_________________________________________________________________________");
             printf("\n\n\t|\tSubjects\t|\tMarks\t|\tGrade\t|\tGPA\t|");
@@ -53,7 +53,6 @@ re_symbol_no:
             printf("\n\n\t\t\t\t\t    Grade Point Average (GPA): %.2f", read_student.cgpa);
             printf("\n\t_________________________________________________________________________\n\n");
         }
-
     }
 
     if (student_found == 0)

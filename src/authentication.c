@@ -238,30 +238,34 @@ int login_validated(char username[], char password[])
 	return id_matched;
 }
 
-int college_code_matches() {
+int college_code_matches()
+{
 	system("cls");
-    int input_length;
-    char input_code[30];
-    char code[30];
-    FILE *college_code;
-    college_code = fopen("resources/college_codes.txt", "r");
-    if (college_code == NULL) {
-        printf("\n College Code file not found.");
-        return 0;
-    }
+	int input_length;
+	char input_code[30];
+	char code[30];
+	FILE *college_code;
+	college_code = fopen("resources/college_codes.txt", "r");
+	if (college_code == NULL)
+	{
+		printf("\n College Code file not found.");
+		return 0;
+	}
 
-    fflush(stdin);
-    printf("\n Enter your College code: ");
-    scanf("%[^\n]", input_code);
-    fflush(stdin);
+	fflush(stdin);
+	printf("\n Enter your College code: ");
+	scanf("%[^\n]", input_code);
+	fflush(stdin);
 
-    while (fgets(code, sizeof(code), college_code) != NULL) {
-        code[strcspn(code, "\n")] = '\0';
-        if (strcmp(code, input_code) == 0) {
-            fclose(college_code);
-            return 1;
-        }
-    }
-    fclose(college_code);
-    return 0;
+	while (fgets(code, sizeof(code), college_code) != NULL)
+	{
+		code[strcspn(code, "\n")] = '\0';
+		if (strcmp(code, input_code) == 0)
+		{
+			fclose(college_code);
+			return 1;
+		}
+	}
+	fclose(college_code);
+	return 0;
 }

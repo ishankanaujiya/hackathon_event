@@ -13,7 +13,7 @@ typedef struct
 {
     char username[31];
     unsigned char password_hash[64];
-    //char college_code[30];
+    // char college_code[30];
 } User;
 
 void entry();

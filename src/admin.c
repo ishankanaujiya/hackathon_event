@@ -65,7 +65,7 @@ void addstudent()
     int is_student_present = 0;
     int date_is_valid;
     int name_valid;
-    
+
     struct Student input_student;
     struct Student read_student;
 
@@ -93,7 +93,7 @@ again_name:
     }
 again_symbol:
 
-    is_student_present=0;
+    is_student_present = 0;
     printf("\nEnter your symbol no: ");
     scanf("%d", &input_student.symbol_no);
     rewind(file_ptr);
@@ -103,8 +103,8 @@ again_symbol:
         {
             is_student_present = 1;
             printf("\nStudent with %d symbol number already exists.\n", input_student.symbol_no);
-            
-            //rewind(file_ptr);
+
+            // rewind(file_ptr);
             goto again_symbol;
         }
     }
@@ -153,7 +153,7 @@ again_subject:
 
     if (!is_student_present)
     {
-        fseek(file_ptr,0,SEEK_END);
+        fseek(file_ptr, 0, SEEK_END);
         fwrite(&input_student, sizeof(struct Student), 1, file_ptr);
     }
     printf("\nFILE HAS BEEN SUCCESFULLY ADDED");
@@ -181,6 +181,7 @@ void view_record()
     {
         printf("\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
         printf("\n\nSymbol Number: %d", read_student.symbol_no);
+        printf("\n\nLevel: Bachelor");
         printf("\n\nDate of Birth: %d /%d /%d", read_student.DOB[0], read_student.DOB[1], read_student.DOB[2]);
         printf("\n\t_________________________________________________________________________");
         printf("\n\n\t|\tSubjects\t|\tMarks\t|\tGrade\t|\tGPA\t|");
@@ -226,6 +227,7 @@ re_symbol:
             found_student = 1;
             printf("\n\nStudent Name : %s %s", read_student.first_name, read_student.last_name);
             printf("\n\nSymbol Number: %d", read_student.symbol_no);
+            printf("\n\nLevel: Bachelor");
             printf("\n\nDate of Birth: %d /%d /%d", read_student.DOB[0], read_student.DOB[1], read_student.DOB[2]);
             printf("\n\t_________________________________________________________________________");
             printf("\n\n\t|\tSubjects\t|\tMarks\t|\tGrade\t|\tGPA\t|");
